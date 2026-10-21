@@ -20,6 +20,12 @@ dist/
 # --- Environment / secrets ---
 .env
 .env.*
+tokens.txt
+*tokens.txt
+*.token
+token*.json
+secrets.json
+credentials.json
 
 # --- downloaded/temp ---
 .tempo*

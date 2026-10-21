@@ -3,6 +3,7 @@ import sys
 
 import numpy as np
 import sounddevice as sd
+import matplotlib.pyplot as plt 
 
 # CLI things
 CYAN    = "\033[96m"
@@ -26,18 +27,22 @@ block_size = 1024 # 23 ms delay
 
 audio_queue = queue.Queue()
 
+def process(x):
+    "To process audio later"
+    return x
+
 def audio_callback(indata, frames, time, status):
     if status:
         print(status, file=sys.stderr)
-    audio_queue.put(indata.copy())
+    audio_queue.put(process(indata.copy()))
 
 def listen_mic() -> None:
     stream = sd.InputStream(
-        device=device, 
-        channels=channels, 
-        samplerate=sample_rate, 
-        blocksize=block_size,
-        callback=audio_callback
+        device = device, 
+        channels = channels, 
+        samplerate = sample_rate, 
+        blocksize = block_size,
+        callback = audio_callback
     )
 
     print(f"{BOLD}{RED}+{RESET} Streaming started, listening to mic...")
@@ -65,9 +70,9 @@ def play_audio() -> None:
 
 def display_ui() -> None:
     print(f"\n{BOLD}{RED}?{RESET} What do you want to do?")
-    print(f"  1: Capture mic audio")
-    print(f"  2: Play audio")
-    print(f"  q: quit app\n")
+    print(f"  {BOLD}{RED}1{RESET}: Capture mic audio")
+    print(f"  {BOLD}{RED}2{RESET}: Play audio")
+    print(f"  {BOLD}{RED}q{RESET}: quit app\n")
 
 def pause() -> None:
     input(f"{BOLD}{RED}?{RESET} Press {BOLD}{RED}ENTER{RESET} to continue")

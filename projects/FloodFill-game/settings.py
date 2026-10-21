@@ -1,0 +1,13 @@
+SCREEN_SIZE = (1280, 720)
+REFRESH_RATE = 60
+
+RECT_WIDTH = 40
+RECT_HEIGHT = 40
+SQUARE_DIM = 40
+
+COLORS = [
+    (250, 250, 250),
+    (250, 0, 0),
+    (0, 250, 0),
+    (0, 0, 250)
+]
